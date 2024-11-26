@@ -19,12 +19,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tapahtumattampere.data.Event
-import com.example.tapahtumattampere.data.MainViewModel
+import com.example.tapahtumattampere.data.EventViewModel
 
 
 @Composable
-fun EventList(navController: NavController, viewModel: MainViewModel = viewModel()) {
-    val events by viewModel.events
+fun EventList(navController: NavController, eventViewModel: EventViewModel = viewModel()) {
+    val events by eventViewModel.events
     if(events.isNotEmpty()){
         LazyColumn {
             items(events.size) { event ->
