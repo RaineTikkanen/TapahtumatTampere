@@ -6,13 +6,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HeaderBar(headerText: String){
+fun HeaderBar(headerText: String, scrollBehavior: TopAppBarScrollBehavior){
     CenterAlignedTopAppBar(
-        scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(),
         colors = topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             titleContentColor = MaterialTheme.colorScheme.primary
@@ -23,6 +23,7 @@ fun HeaderBar(headerText: String){
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                 text = headerText
             )
-        }
+        },
+        scrollBehavior = scrollBehavior
     )
 }

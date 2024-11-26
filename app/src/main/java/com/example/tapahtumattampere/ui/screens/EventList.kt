@@ -2,7 +2,9 @@ package com.example.tapahtumattampere.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
@@ -50,7 +52,7 @@ fun ErrorScreen() {
 @Composable
 fun ResultScreen(eventViewModel: EventViewModel, navController: NavController) {
     val events = eventViewModel.events
-    LazyColumn {
+    LazyColumn (){
         items(events.size) { event ->
             EventListComponent(event = events[event], navController)
         }
