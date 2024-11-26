@@ -1,4 +1,4 @@
-package com.example.tapahtumattampere.ui.composables
+package com.example.tapahtumattampere.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -31,7 +31,7 @@ fun EventListComponent(event: Event, navController: NavController) {
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(5.dp)
             .clickable(onClick = {navController.navigate("info")})
     )
     {
@@ -40,7 +40,7 @@ fun EventListComponent(event: Event, navController: NavController) {
         ) {
             Text(
                 text = event.name,
-                fontSize = 24.sp,
+                fontSize = 18.sp,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             if (event.start_time != null) {

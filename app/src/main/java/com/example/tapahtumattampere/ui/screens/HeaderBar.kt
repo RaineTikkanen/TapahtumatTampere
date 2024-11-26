@@ -1,4 +1,4 @@
-package com.example.tapahtumattampere.ui.composables
+package com.example.tapahtumattampere.ui.screens
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api

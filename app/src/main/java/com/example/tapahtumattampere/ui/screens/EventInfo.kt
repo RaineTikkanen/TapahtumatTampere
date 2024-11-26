@@ -1,4 +1,4 @@
-package com.example.tapahtumattampere.ui.composables
+package com.example.tapahtumattampere.ui.screens
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
