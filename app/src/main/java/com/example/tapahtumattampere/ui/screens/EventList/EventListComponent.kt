@@ -1,4 +1,4 @@
-package com.example.tapahtumattampere.ui.screens
+package com.example.tapahtumattampere.ui.screens.EventList
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

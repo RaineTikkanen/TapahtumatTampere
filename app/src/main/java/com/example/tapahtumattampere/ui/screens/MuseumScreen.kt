@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
 
 @Composable
-fun EventInfo(headerViewModel: HeaderViewModel){
-    headerViewModel.updateHeaderText("Info")
-    Text("INFO")
+fun MuseumScreen(headerViewModel: HeaderViewModel) {
+    headerViewModel.updateHeaderText("Museums")
+    Text("Museums")
 }

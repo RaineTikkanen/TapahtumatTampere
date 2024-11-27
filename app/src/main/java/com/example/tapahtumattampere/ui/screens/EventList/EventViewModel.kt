@@ -1,4 +1,4 @@
-package com.example.tapahtumattampere.ui.screens
+package com.example.tapahtumattampere.ui.screens.EventList
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,14 +16,13 @@ import kotlinx.coroutines.launch
 
 
 sealed interface EventUiState {
-    data class Success(val result: String) : EventUiState
+    data class Success(val result: List<Event>) : EventUiState
     object Error : EventUiState
     object Loading : EventUiState
 }
 
 class EventViewModel (private val eventsRepository: EventsRepository): ViewModel() {
     var eventUiState: EventUiState by mutableStateOf(EventUiState.Loading)
-    var events: List<Event> by mutableStateOf(listOf())
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
@@ -43,8 +42,7 @@ class EventViewModel (private val eventsRepository: EventsRepository): ViewModel
         viewModelScope.launch {
             eventUiState = EventUiState.Loading
             eventUiState = try {
-                events = eventsRepository.getEvents()
-                EventUiState.Success(result = "Success: ${events.size} events found")
+                EventUiState.Success(eventsRepository.getEvents())
             } catch (e: Exception) {
                 EventUiState.Error
             }
