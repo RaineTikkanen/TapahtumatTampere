@@ -6,9 +6,10 @@ import androidx.navigation.NavController
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
 import com.example.tapahtumattampere.ui.screens.EventList.EventList
 import com.example.tapahtumattampere.ui.screens.EventList.EventViewModel
+import com.example.tapahtumattampere.ui.screens.EventList.ViewOptions
 
 @Composable
 fun HomeScreen(headerViewModel: HeaderViewModel, navController: NavController, eventViewModel: EventViewModel){
-    headerViewModel.updateHeaderText("Home")
-    EventList(navController, eventViewModel.eventUiState, headerViewModel)
+    headerViewModel.updateHeaderText("Tapahtumat")
+    EventList(navController, eventViewModel.eventUiState, viewOption = ViewOptions.HOME)
 }

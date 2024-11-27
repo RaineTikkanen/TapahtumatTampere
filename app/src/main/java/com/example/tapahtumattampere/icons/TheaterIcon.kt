@@ -6,13 +6,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-val TheaterComedy: ImageVector
+val TheaterIcon: ImageVector
     get() {
-        if (_TheaterComedy != null) {
-            return _TheaterComedy!!
+        if (_TheaterIcon != null) {
+            return _TheaterIcon!!
         }
-        _TheaterComedy = ImageVector.Builder(
-            name = "TheaterComedy",
+        _TheaterIcon = ImageVector.Builder(
+            name = "TheaterIcon",
             defaultWidth = 24.dp,
             defaultHeight = 24.dp,
             viewportWidth = 960f,
@@ -116,8 +116,8 @@ val TheaterComedy: ImageVector
             }
         }.build()
 
-        return _TheaterComedy!!
+        return _TheaterIcon!!
     }
 
 @Suppress("ObjectPropertyName")
-private var _TheaterComedy: ImageVector? = null
+private var _TheaterIcon: ImageVector? = null

@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil3.compose.AsyncImage
+import com.example.tapahtumattampere.Info
 import com.example.tapahtumattampere.data.Event
 import com.example.tapahtumattampere.utils.formatAddress
 import com.example.tapahtumattampere.utils.formatDate
@@ -32,9 +34,16 @@ fun EventListComponent(event: Event, navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
-            .clickable(onClick = {navController.navigate("info")})
+            .clickable(onClick = {navController.navigate(route=Info(event.id))})
     )
     {
+        AsyncImage(
+            model=event.images[0].url,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+        )
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
@@ -47,13 +56,13 @@ fun EventListComponent(event: Event, navController: NavController) {
                 if (startDate == endDate) {
                     Text(
                         text = "$startDate $startTime - $endTime",
-                        fontSize = 16.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 } else {
                     Text(
                         text = "$startDate - $endDate",
-                        fontSize = 16.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }

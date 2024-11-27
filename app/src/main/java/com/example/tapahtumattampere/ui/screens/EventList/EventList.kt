@@ -17,12 +17,34 @@ import com.example.tapahtumattampere.data.Event
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
 
 
+fun filter(events: List<Event>, viewOption: ViewOptions): List<Event> {
+    return(
+            when (viewOption) {
+                ViewOptions.SPORT -> {
+                    events.filter { it.categories.contains("Urheilu") }
+                }
+
+                ViewOptions.MUSEUM-> {
+                    events.filter { it.categories.contains("Museot ja galleriat") }
+                }
+
+                ViewOptions.THEATRE -> {
+                    events.filter { it.categories.contains("Teatteri") }
+                }
+
+                else -> {
+                    events
+                }
+            }
+            )
+
+}
+
 @Composable
-fun EventList(navController: NavController,eventUiState: EventUiState, headerViewModel: HeaderViewModel) {
-    headerViewModel.updateHeaderText("Tapahtumat")
+fun EventList(navController: NavController,eventUiState: EventUiState, viewOption: ViewOptions) {
     when (eventUiState) {
         is EventUiState.Loading -> LoadingScreen()
-        is EventUiState.Success -> ResultScreen2(eventUiState.result, navController)
+        is EventUiState.Success -> ResultScreen2(filter(eventUiState.result, viewOption), navController)
         is EventUiState.Error -> ErrorScreen()
     }
 }
@@ -61,6 +83,7 @@ fun ResultScreen(events: List<Event>, navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResultScreen2(events: List<Event>, navController: NavController) {
+
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(5.dp),
