@@ -27,10 +27,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.tapahtumattampere.ui.bottomNavBar.BottomNavigationBar
 import com.example.tapahtumattampere.ui.screens.EventInfo
-import com.example.tapahtumattampere.ui.screens.EventList.EventList
 import com.example.tapahtumattampere.ui.screens.EventList.EventViewModel
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
-import com.example.tapahtumattampere.ui.screens.HomeScreen
+import com.example.tapahtumattampere.ui.screens.HomeScreen.HomeScreen
 import com.example.tapahtumattampere.ui.screens.MuseumScreen
 import com.example.tapahtumattampere.ui.screens.SportScreen
 import com.example.tapahtumattampere.ui.screens.TheatreScreen
@@ -74,10 +73,10 @@ fun App() {
         { innerPadding ->
             Column(modifier=Modifier.padding(innerPadding)) {
                 NavHost(navController = navController, startDestination = "homeScreen") {
-                    composable("homeScreen") { HomeScreen(headerViewModel, navController, eventViewModel)}
-                    composable("museumScreen") { MuseumScreen(headerViewModel, navController, eventViewModel)}
-                    composable("sportScreen") { SportScreen(headerViewModel, navController, eventViewModel)}
-                    composable("theatreScreen") { TheatreScreen(headerViewModel, navController, eventViewModel)}
+                    composable("homeScreen") { HomeScreen(headerViewModel, navController, eventViewModel.eventUiState) }
+                    composable("museumScreen") { MuseumScreen(headerViewModel, navController, eventViewModel.eventUiState)}
+                    composable("sportScreen") { SportScreen(headerViewModel, navController, eventViewModel.eventUiState)}
+                    composable("theatreScreen") { TheatreScreen(headerViewModel, navController, eventViewModel.eventUiState)}
                     composable<Info>{backStackEntry->
                         val info:Info=backStackEntry.toRoute()
                         EventInfo(headerViewModel, info.id, eventViewModel.eventUiState)

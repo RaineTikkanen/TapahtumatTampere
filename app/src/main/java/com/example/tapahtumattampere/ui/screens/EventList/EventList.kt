@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tapahtumattampere.data.Event
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
+import com.example.tapahtumattampere.ui.screens.ErrorScreen
+import com.example.tapahtumattampere.ui.screens.LoadingScreen
 
 
 fun filter(events: List<Event>, viewOption: ViewOptions): List<Event> {
@@ -46,28 +48,6 @@ fun EventList(navController: NavController,eventUiState: EventUiState, viewOptio
         is EventUiState.Loading -> LoadingScreen()
         is EventUiState.Success -> ResultScreen2(filter(eventUiState.result, viewOption), navController)
         is EventUiState.Error -> ErrorScreen()
-    }
-}
-
-@Composable
-fun LoadingScreen() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = "Loading")
-    }
-}
-
-@Composable
-fun ErrorScreen() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("Can't load data")
     }
 }
 

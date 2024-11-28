@@ -4,16 +4,23 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.example.tapahtumattampere.Info
+import com.example.tapahtumattampere.R
 import com.example.tapahtumattampere.data.Event
 import com.example.tapahtumattampere.utils.formatAddress
 import com.example.tapahtumattampere.utils.formatDate
@@ -38,15 +45,16 @@ fun EventListComponent(event: Event, navController: NavController) {
     )
     {
         AsyncImage(
-            model=event.images[0].url,
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(event.images[0].url)
+                .crossfade(true)
+                .build(),
+            placeholder = painterResource(R.drawable.generic_event_andrew_knechel),
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp)
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size(200.dp)
         )
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
+        Column (modifier=Modifier.padding(16.dp)){
             Text(
                 text = event.name,
                 fontSize = 18.sp,

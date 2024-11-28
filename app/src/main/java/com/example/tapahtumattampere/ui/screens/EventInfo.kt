@@ -4,6 +4,8 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +21,9 @@ fun EventInfo(headerViewModel: HeaderViewModel, id: String,eventUiState: EventUi
     val event = (eventUiState as EventUiState.Success).result.find { it.id == id }
     if (event != null) {
         headerViewModel.updateHeaderText(event.name)
-        Column {
+        Column (
+            modifier=Modifier.verticalScroll(rememberScrollState())
+        ){
             AsyncImage(
                 model = event.images[0].url,
                 contentDescription = null
