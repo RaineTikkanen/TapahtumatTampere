@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.tapahtumattampere.icons.ExploreIcon
+import com.example.tapahtumattampere.icons.ExploreIconFilled
 import com.example.tapahtumattampere.icons.HomeIcon
 import com.example.tapahtumattampere.icons.HomeIconFilled
 import com.example.tapahtumattampere.icons.MuseumIcon
@@ -54,23 +56,11 @@ fun BottomNavigationBar(navController: NavController, bottomBarState: MutableSta
             route = "homeScreen"
         ),
         NavItem(
-            title = "Museums",
-            selectedIcon = MuseumIconFilled,
-            unselectedIcon = MuseumIcon,
-            route = "museumScreen"
-        ),
-        NavItem(
-            title = "Sports",
-            selectedIcon = TennisIconFilled,
-            unselectedIcon = TennisIcon,
-            route = "sportScreen"
-        ),
-        NavItem(
-            title = "Theatres",
-            selectedIcon = TheaterIconFilled,
-            unselectedIcon = TheaterIcon,
-            route = "theatreScreen"
-        )
+            title = "Explore",
+            selectedIcon = ExploreIconFilled,
+            unselectedIcon = ExploreIcon,
+            route = "exploreScreen"
+    )
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()

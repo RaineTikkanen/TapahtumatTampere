@@ -1,12 +1,11 @@
 package com.example.tapahtumattampere.utils
 
-import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
+import java.time.LocalDateTime
 
-fun formatTime(time: String): String {
-    if (time == null) {
-        return ""
-    }
-    val formattedDate = OffsetDateTime.parse(time)
-    return formattedDate.format(DateTimeFormatter.ofPattern("HH:mm"))
+fun formatTime(time: LocalDateTime): String{
+    val hour = time.hour
+    val minute = time.minute
+    val formattedHour = if (hour < 10) "0$hour" else hour.toString()
+    val formattedMinute = if (minute < 10) "0$minute" else minute.toString()
+    return "$formattedHour:$formattedMinute"
 }

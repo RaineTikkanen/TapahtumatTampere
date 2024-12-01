@@ -7,9 +7,9 @@ interface EventsRepository{
 }
 
 class NetworkEventsRepository(
-    private val EventApiService: EventApiService
+    private val eventApiService: EventApiService
 ): EventsRepository{
     override suspend fun getEvents(): List<Event> {
-        return EventApiService.getEvents()
+        return eventApiService.getEvents()
     }
 }

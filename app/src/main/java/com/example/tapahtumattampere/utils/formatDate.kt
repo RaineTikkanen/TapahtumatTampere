@@ -1,12 +1,10 @@
 package com.example.tapahtumattampere.utils
 
-import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
+import java.time.LocalDateTime
 
-fun formatDate(time: String): String {
-    if (time == null) {
-        return ""
-    }
-    val formattedDate = OffsetDateTime.parse(time)
-    return formattedDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+fun formatDate(date: LocalDateTime): String{
+    val day = date.dayOfMonth
+    val month = date.monthValue
+    val year = date.year
+    return "$day.$month.$year"
 }

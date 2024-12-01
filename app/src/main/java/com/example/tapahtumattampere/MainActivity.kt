@@ -27,12 +27,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.tapahtumattampere.ui.bottomNavBar.BottomNavigationBar
 import com.example.tapahtumattampere.ui.screens.EventInfo
-import com.example.tapahtumattampere.ui.screens.EventList.EventViewModel
+import com.example.tapahtumattampere.ui.screens.eventList.EventViewModel
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
-import com.example.tapahtumattampere.ui.screens.HomeScreen.HomeScreen
-import com.example.tapahtumattampere.ui.screens.MuseumScreen
-import com.example.tapahtumattampere.ui.screens.SportScreen
-import com.example.tapahtumattampere.ui.screens.TheatreScreen
+import com.example.tapahtumattampere.ui.screens.ExploreScreen
+import com.example.tapahtumattampere.ui.screens.homeScreen.HomeScreen
 import kotlinx.serialization.Serializable
 
 
@@ -56,9 +54,7 @@ fun App() {
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
     when (navBackStackEntry?.destination?.route) {
         "homeScreen" -> bottomBarState.value = true
-        "museumScreen" -> bottomBarState.value = true
-        "sportScreen" -> bottomBarState.value = true
-        "theatreScreen" -> bottomBarState.value = true
+        "exploreScreen" -> bottomBarState.value = true
         else -> bottomBarState.value = false
     }
     TapahtumatTampereTheme {
@@ -74,9 +70,7 @@ fun App() {
             Column(modifier=Modifier.padding(innerPadding)) {
                 NavHost(navController = navController, startDestination = "homeScreen") {
                     composable("homeScreen") { HomeScreen(headerViewModel, navController, eventViewModel.eventUiState) }
-                    composable("museumScreen") { MuseumScreen(headerViewModel, navController, eventViewModel.eventUiState)}
-                    composable("sportScreen") { SportScreen(headerViewModel, navController, eventViewModel.eventUiState)}
-                    composable("theatreScreen") { TheatreScreen(headerViewModel, navController, eventViewModel.eventUiState)}
+                    composable("exploreScreen") { ExploreScreen(headerViewModel, navController, eventViewModel.eventUiState) }
                     composable<Info>{backStackEntry->
                         val info:Info=backStackEntry.toRoute()
                         EventInfo(headerViewModel, info.id, eventViewModel.eventUiState)
