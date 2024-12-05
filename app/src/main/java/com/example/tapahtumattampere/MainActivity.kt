@@ -47,16 +47,18 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
-    val eventViewModel: EventViewModel = viewModel(factory = EventViewModel.Factory)
+    val eventViewModel: EventViewModel = viewModel()
     val headerViewModel: HeaderViewModel = viewModel()
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-    when (navBackStackEntry?.destination?.route) {
-        "homeScreen" -> bottomBarState.value = true
-        "exploreScreen" -> bottomBarState.value = true
+    when (currentDestination?.route) {
+        "home" -> bottomBarState.value = true
+        "explore" -> bottomBarState.value = true
         else -> bottomBarState.value = false
     }
+
     TapahtumatTampereTheme {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
         Scaffold(
@@ -68,9 +70,9 @@ fun App() {
         )
         { innerPadding ->
             Column(modifier=Modifier.padding(innerPadding)) {
-                NavHost(navController = navController, startDestination = "homeScreen") {
-                    composable("homeScreen") { HomeScreen(headerViewModel, navController, eventViewModel.eventUiState) }
-                    composable("exploreScreen") { ExploreScreen(headerViewModel, navController, eventViewModel.eventUiState) }
+                NavHost(navController = navController, startDestination = "home") {
+                    composable("home") { HomeScreen(headerViewModel,navController, eventViewModel.eventUiState) }
+                    composable("explore") { ExploreScreen(headerViewModel, navController, eventViewModel.eventUiState) }
                     composable<Info>{backStackEntry->
                         val info:Info=backStackEntry.toRoute()
                         EventInfo(headerViewModel, info.id, eventViewModel.eventUiState)

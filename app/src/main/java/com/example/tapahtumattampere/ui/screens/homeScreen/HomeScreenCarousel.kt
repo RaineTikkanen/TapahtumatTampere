@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.tapahtumattampere.data.Event
+import com.example.tapahtumattampere.domain.model.Event
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

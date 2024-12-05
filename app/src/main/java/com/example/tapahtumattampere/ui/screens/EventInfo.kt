@@ -17,57 +17,59 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
 import com.example.tapahtumattampere.ui.screens.eventList.EventUiState
-import com.example.tapahtumattampere.utils.findNextDates
 import com.example.tapahtumattampere.utils.formatDate
 import com.example.tapahtumattampere.utils.formatTime
 
 @Composable
 fun EventInfo(headerViewModel: HeaderViewModel, id: String,eventUiState: EventUiState) {
     val event = (eventUiState as EventUiState.Success).result.find { it.id == id }
-    val nextDates = findNextDates(event!!.dates)
+    //val nextDates = findNextDates(event!!.dates)
     headerViewModel.updateHeaderText("Info")
-    Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
-    ) {
-        AsyncImage(
-            model = event.images[0].url,
-            contentDescription = null
-        )
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(
-                text = event.name,
-                style = MaterialTheme.typography.headlineLarge,
-                modifier = Modifier.padding(bottom = 16.dp)
+    if (event != null) {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState())
+        ) {
+            AsyncImage(
+                model = event.image,
+                contentDescription = null
             )
-            HorizontalDivider(modifier = Modifier.padding(16.dp))
-            if (event.locations.isNotEmpty()) {
+            Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    style = MaterialTheme.typography.titleMedium,
-                    text = event.locations[0].address,
+                    text = event.name,
+                    style = MaterialTheme.typography.headlineLarge,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
-            }
-            if (nextDates.isNotEmpty()) {
+                HorizontalDivider(modifier = Modifier.padding(16.dp))
+                if (event.address != null) {
+                    Text(
+                        style = MaterialTheme.typography.titleMedium,
+                        text = event.address.name,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                }
+                if (event.dates.isNotEmpty()) {
+                    Text(
+                        "${formatDate(event.startTime)} ${formatDate(event.endTime)}",
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                }
+                HorizontalDivider(modifier = Modifier.padding(16.dp))
                 Text(
-                    "${formatDate(nextDates[0])} ${formatTime(nextDates[0])}",
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
+                    text = event.description
                 )
-            }
-            HorizontalDivider(modifier = Modifier.padding(16.dp))
-            Text(
-                style = MaterialTheme.typography.bodyMedium,
-                text = event.description
-            )
-            HorizontalDivider(modifier = Modifier.padding(16.dp))
-            Text(
-                text = "Tapahtuma-ajat"
-            )
-            if (nextDates.isNotEmpty()) {
-                Column {
-                    nextDates.forEach { date ->
-                        Text(
-                            text = "${formatDate(date)} ${formatTime(date)}",
-                        )
+                HorizontalDivider(modifier = Modifier.padding(16.dp))
+                Text(
+                    text = "Tapahtuma-ajat"
+                )
+                if (event.dates.isNotEmpty()) {
+                    Column {
+                        event.dates.forEach { date ->
+                            Text(
+                                text = "${formatDate(date.start)} ${formatTime(date.start)}",
+                            )
+                        }
+
                     }
                 }
             }

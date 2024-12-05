@@ -4,14 +4,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.tapahtumattampere.EventsApplication
-import com.example.tapahtumattampere.data.Event
-import com.example.tapahtumattampere.data.EventsRepository
+import com.example.tapahtumattampere.domain.model.Event
+
+import com.example.tapahtumattampere.network.RetrofitInstance
+import com.example.tapahtumattampere.network.model.EventDTOMapper
 import kotlinx.coroutines.launch
 
 
@@ -21,18 +18,10 @@ sealed interface EventUiState {
     data object Loading : EventUiState
 }
 
-class EventViewModel (private val eventsRepository: EventsRepository): ViewModel() {
+class EventViewModel (): ViewModel() {
+    private val _apiService = RetrofitInstance.api
     var eventUiState: EventUiState by mutableStateOf(EventUiState.Loading)
 
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[APPLICATION_KEY] as EventsApplication)
-                val eventsRepository = application.container.eventsRepository
-                EventViewModel(eventsRepository = eventsRepository)
-            }
-        }
-    }
 
     init{
         getEvents()
@@ -42,8 +31,11 @@ class EventViewModel (private val eventsRepository: EventsRepository): ViewModel
         viewModelScope.launch {
             eventUiState = EventUiState.Loading
             eventUiState = try {
-                EventUiState.Success(eventsRepository.getEvents())
+                val events = _apiService.getEvents()
+                val mappedEvents = EventDTOMapper().fromEntityList(events)
+                EventUiState.Success(mappedEvents)
             } catch (e: Exception) {
+                println("Error: $e")
                 EventUiState.Error
             }
         }

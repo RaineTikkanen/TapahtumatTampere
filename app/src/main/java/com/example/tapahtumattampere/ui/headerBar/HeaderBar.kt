@@ -14,10 +14,7 @@ import androidx.compose.runtime.livedata.observeAsState
 fun HeaderBar(scrollBehavior: TopAppBarScrollBehavior, headerViewModel: HeaderViewModel){
     val headerText = headerViewModel.headerText.observeAsState().value
     CenterAlignedTopAppBar(
-        colors = topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary
-        ),
+
         title = {
             Text(
                 style = MaterialTheme.typography.titleLarge,

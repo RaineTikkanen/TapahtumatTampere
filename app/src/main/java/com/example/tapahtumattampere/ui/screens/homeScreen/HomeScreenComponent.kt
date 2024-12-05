@@ -24,17 +24,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
 import com.example.tapahtumattampere.Info
-import com.example.tapahtumattampere.data.Event
-import com.example.tapahtumattampere.utils.findNextDates
-import com.example.tapahtumattampere.utils.formatDate
-import com.example.tapahtumattampere.utils.formatDay
-import com.example.tapahtumattampere.utils.formatTime
+import com.example.tapahtumattampere.domain.model.Event
 
 
 @Composable
 fun HomeScreenComponent(event: Event, navController: NavController, time: Time) {
-    val nextDate = findNextDates(event.dates)
-    val painter = rememberAsyncImagePainter(event.images[0].url)
+    //val nextDate = findNextDates(event.dates)
+    val painter = rememberAsyncImagePainter(event.image)
     val colors = listOf(
        Color.Transparent,
        MaterialTheme.colorScheme.surfaceVariant
@@ -79,6 +75,7 @@ fun HomeScreenComponent(event: Event, navController: NavController, time: Time) 
                         .padding(bottom = 8.dp),
                     maxLines = 2
                 )
+                /*
                 if (time == Time.TIME&&nextDate.isNotEmpty()) {
                     Text(
                         text = formatTime(nextDate[0]),
@@ -100,7 +97,7 @@ fun HomeScreenComponent(event: Event, navController: NavController, time: Time) 
                         modifier = Modifier
                             .padding(bottom = 8.dp)
                     )
-                }
+                }*/
             }
         }
     }

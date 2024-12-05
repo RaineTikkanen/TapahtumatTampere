@@ -1,9 +1,10 @@
 package com.example.tapahtumattampere.utils
 
-import com.example.tapahtumattampere.data.Date
+import com.example.tapahtumattampere.network.model.Date
 import java.time.LocalDate
 import java.time.LocalDateTime
 
+/*
 fun findNextDates(dates: List<Date>): List<LocalDateTime> {
     val today = LocalDate.now()
     return dates.mapNotNull { date ->
@@ -12,4 +13,4 @@ fun findNextDates(dates: List<Date>): List<LocalDateTime> {
             parsedDate
         } else null
     }.sorted()
-}
+}*/

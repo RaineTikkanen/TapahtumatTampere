@@ -26,67 +26,9 @@ import com.example.tapahtumattampere.ui.screens.eventList.EventUiState
 import com.example.tapahtumattampere.ui.screens.eventList.FILTER
 
 
-class FilterChipItem(
-    val title: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
-    val filterContent: FILTER,
-)
-
 @Composable
-fun FilterChipExample(filterChipItem: FilterChipItem, filter: MutableState<FILTER>) {
-    var selected by remember { mutableStateOf(false) }
-
-    FilterChip(
-        onClick = {
-            selected = !selected
-            if (selected) {
-                filter.value = filterChipItem.filterContent
-            }
-                  },
-        label = {
-            Text(filterChipItem.title)
-        },
-        selected = selected,
-        leadingIcon = if (selected) {
-            {
-                Icon(
-                    imageVector = filterChipItem.selectedIcon,
-                    contentDescription = filterChipItem.title,
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
-            }
-        } else {
-            null
-        },
-    )
-}
-
-@Composable
-fun ExploreScreen(headerViewModel: HeaderViewModel, navController: NavController, eventUiState: EventUiState){
+fun ExploreScreen(headerViewModel: HeaderViewModel, navController: NavController, eventUiState: EventUiState) {
     headerViewModel.updateHeaderText("Explore")
-    val filter by remember { mutableStateOf(FILTER.ALL) }
-    val filterChips = listOf(
-       FilterChipItem(
-            title = "Museot",
-            selectedIcon = MuseumIconFilled,
-            unselectedIcon = MuseumIcon,
-            filterContent = FILTER.MUSEUM
-        ),
-        FilterChipItem(
-            title = "Teatterit",
-            selectedIcon = TheaterIconFilled,
-            unselectedIcon = TheaterIcon,
-            filterContent = FILTER.THEATRE
-        ),
-    )
 
-    Column {
-        Row{
-            filterChips.forEach { filterChip ->
-                FilterChipExample(filterChipItem = filterChip, filter = mutableStateOf(filter))
-            }
-        }
-        EventList(navController, eventUiState, filter)
-    }
+    EventList(navController, eventUiState)
 }

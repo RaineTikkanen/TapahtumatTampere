@@ -1,14 +1,20 @@
-package com.example.tapahtumattampere.data
+package com.example.tapahtumattampere.network.model
 
-data class Event(
+import com.google.gson.annotations.SerializedName
+
+
+data class EventDTO(
     val id: String,
-    val _id: String,
+    @SerializedName("_id")
+    val id2: String,
     val creationDate: String,
     val modificationDate: String,
     val name: String,
-    val start_time: String,
-    val end_time: String,
-    val locations: List<Location>,
+    @SerializedName("start_time")
+    val startTime: String,
+    @SerializedName("end_time")
+    val endTime: String,
+    val locations: List<Location> ?= null,
     val dates: List<Date>,
     val links: List<Link>,
     val sourceName: String,

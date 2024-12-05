@@ -13,13 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.tapahtumattampere.data.Event
+import com.example.tapahtumattampere.domain.model.Event
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
 import com.example.tapahtumattampere.ui.screens.ErrorScreen
 import com.example.tapahtumattampere.ui.screens.eventList.EventUiState
 import com.example.tapahtumattampere.ui.screens.LoadingScreen
 import com.example.tapahtumattampere.utils.getWeekNumber
-import com.example.tapahtumattampere.utils.parseDate
 import java.time.LocalDate
 
 @Composable
@@ -33,7 +32,6 @@ fun HomeScreen(headerViewModel: HeaderViewModel, navController: NavController, e
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResultScreen(events: List<Event>, navController: NavController) {
     val today = LocalDate.now()
@@ -41,21 +39,21 @@ fun ResultScreen(events: List<Event>, navController: NavController) {
     val eventsToday = remember {
         events.filter { event ->
             event.dates.any { date ->
-                parseDate(date.start).toLocalDate() == today
+                date.start.toLocalDate() == today
             }
         }
     }
     val eventsThisWeek = remember {
         events.filter { event ->
             event.dates.any { date ->
-                parseDate(date.start).toLocalDate().getWeekNumber() == thisWeek
+                date.start.toLocalDate().getWeekNumber() == thisWeek
             }
         }
     }
     val eventsThisMonth = remember {
         events.filter { event ->
             event.dates.any { date ->
-                parseDate(date.start).month == today.month && parseDate(date.start).year == today.year
+                date.start.month == today.month && date.start.year == today.year
             }
         }
     }
