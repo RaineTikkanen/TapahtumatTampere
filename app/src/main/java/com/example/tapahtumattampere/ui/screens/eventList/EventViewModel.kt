@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tapahtumattampere.domain.model.Event
 
-import com.example.tapahtumattampere.network.RetrofitInstance
-import com.example.tapahtumattampere.network.model.EventDTOMapper
+import com.example.tapahtumattampere.repository.EventRepository
 import kotlinx.coroutines.launch
 
 
@@ -18,10 +17,10 @@ sealed interface EventUiState {
     data object Loading : EventUiState
 }
 
-class EventViewModel (): ViewModel() {
-    private val _apiService = RetrofitInstance.api
+class EventViewModel(
+    private val repository: EventRepository
+): ViewModel() {
     var eventUiState: EventUiState by mutableStateOf(EventUiState.Loading)
-
 
     init{
         getEvents()
@@ -31,9 +30,7 @@ class EventViewModel (): ViewModel() {
         viewModelScope.launch {
             eventUiState = EventUiState.Loading
             eventUiState = try {
-                val events = _apiService.getEvents()
-                val mappedEvents = EventDTOMapper().fromEntityList(events)
-                EventUiState.Success(mappedEvents)
+                EventUiState.Success(repository.getAllEvents())
             } catch (e: Exception) {
                 println("Error: $e")
                 EventUiState.Error

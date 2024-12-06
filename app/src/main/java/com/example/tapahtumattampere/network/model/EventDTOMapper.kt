@@ -42,7 +42,7 @@ class EventDTOMapper{
             EventDate(parseDate(it.start), parseDate(it.end))
         }
         return Event(
-            id = model.id,
+            id = model.id2,
             name = model.name,
             description = model.description,
             location = location,
@@ -55,7 +55,11 @@ class EventDTOMapper{
         )
     }
 
-    fun fromEntityList(entities: List<EventDTO>): List<Event> {
+    fun toDomainModel(model: EventDTO): Event {
+        return mapToDomainModel(model)
+    }
+
+    fun toDomainList(entities: List<EventDTO>): List<Event> {
         return entities.map { mapToDomainModel(it) }
     }
 }
