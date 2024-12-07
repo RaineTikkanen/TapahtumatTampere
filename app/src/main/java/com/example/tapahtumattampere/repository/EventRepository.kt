@@ -3,8 +3,12 @@ package com.example.tapahtumattampere.repository
 import com.example.tapahtumattampere.domain.model.Event
 import com.example.tapahtumattampere.network.RetrofitInstance
 import com.example.tapahtumattampere.network.model.EventDTOMapper
+import javax.inject.Inject
 
-class EventRepository(
+
+class EventRepository
+@Inject
+constructor(
     private val apiService: RetrofitInstance,
     private val mapper: EventDTOMapper
 ) {

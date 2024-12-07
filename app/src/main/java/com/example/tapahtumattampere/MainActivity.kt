@@ -31,9 +31,11 @@ import com.example.tapahtumattampere.ui.screens.eventList.EventViewModel
 import com.example.tapahtumattampere.ui.headerBar.HeaderViewModel
 import com.example.tapahtumattampere.ui.screens.ExploreScreen
 import com.example.tapahtumattampere.ui.screens.homeScreen.HomeScreen
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
 
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

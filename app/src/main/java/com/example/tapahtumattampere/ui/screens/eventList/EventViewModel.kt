@@ -8,7 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.tapahtumattampere.domain.model.Event
 
 import com.example.tapahtumattampere.repository.EventRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 sealed interface EventUiState {
@@ -17,8 +19,11 @@ sealed interface EventUiState {
     data object Loading : EventUiState
 }
 
-class EventViewModel(
+@HiltViewModel
+class EventViewModel
+    @Inject constructor(
     private val repository: EventRepository
+
 ): ViewModel() {
     var eventUiState: EventUiState by mutableStateOf(EventUiState.Loading)
 
