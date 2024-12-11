@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
     kotlin("plugin.serialization") version "2.0.21"
 
 }
@@ -48,10 +46,6 @@ android {
 }
 
 dependencies {
-    //Hilt
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-
     implementation(libs.androidx.palette)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.coil.compose)

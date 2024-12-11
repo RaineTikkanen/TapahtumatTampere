@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TapahtumatTampere</string>
+    <string name="CantLoadData">Datan hakeminen epäonnistui</string>
+    <string name="events">Tapahtumat</string>
+    <string name="today">Tänään</string>
+    <string name="this_week">Tällä viikolla</string>
+    <string name="this_month">Tässä kuussa</string>
+    <string name="lang">fi</string>
+    <string name="ShowOnMap">Näytä kartalla</string>
+    <string name="OpenInBrowser">Avaa selaimessa</string>
+    <string name="EventTimes">Tapahtuma-ajat</string>
+    <string name="Loading">Ladataan</string>
+    <string name="search">Hae</string>
+    <string name="no_events_found">Tapahtumia ei löytynyt</string>
+    <string name="explore">Tutustu</string>
+</resources>

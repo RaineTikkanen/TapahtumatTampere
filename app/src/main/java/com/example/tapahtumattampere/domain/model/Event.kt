@@ -13,7 +13,21 @@ data class Event (
     val dates: List<EventDate>,
     val url: String,
     val image: String,
-)
+    val categories: List<String>,
+){
+    fun doesMatchQuery(query: String): Boolean {
+        val matchResult = listOf(
+            name,
+            description,
+            categories.joinToString(" "),
+            )
+        return matchResult.any {
+            it.contains(query, ignoreCase = true)
+        }
+    }
+}
+
+
 data class Coordinates(
     val lon: Double,
     val lat: Double

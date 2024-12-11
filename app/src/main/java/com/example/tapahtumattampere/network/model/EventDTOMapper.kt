@@ -51,7 +51,8 @@ class EventDTOMapper{
             endTime = parseDate(model.endTime),
             dates = dates,
             url = model.url,
-            image = model.images[0].url
+            image = model.images[0].url,
+            categories = model.categories
         )
     }
 

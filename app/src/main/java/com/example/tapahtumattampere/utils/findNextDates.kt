@@ -1,16 +1,15 @@
 package com.example.tapahtumattampere.utils
 
-import com.example.tapahtumattampere.network.model.Date
+import com.example.tapahtumattampere.domain.model.EventDate
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-/*
-fun findNextDates(dates: List<Date>): List<LocalDateTime> {
+
+fun findNextDates(dates: List<EventDate>): List<EventDate> {
     val today = LocalDate.now()
     return dates.mapNotNull { date ->
-        val parsedDate = parseDate(date.start)
-        if (parsedDate.toLocalDate().isAfter(today)||parsedDate.toLocalDate().isEqual(today)) {
-            parsedDate
+        if (date.start.toLocalDate().isAfter(today)||date.start.toLocalDate().isEqual(today)) {
+            date
         } else null
-    }.sorted()
-}*/
+    }.sortedBy { it.start }
+}
