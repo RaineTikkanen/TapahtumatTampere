@@ -46,7 +46,6 @@ fun App() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-    val bottomBarOffset= animateDpAsState(targetValue = if (bottomBarState.value) 80.dp else 24.dp)
     val darkTheme= rememberSaveable { (mutableStateOf(true)) }
     when (currentDestination?.route) {
         "home" -> bottomBarState.value = true
@@ -61,8 +60,9 @@ fun App() {
                 .fillMaxSize()
         )
         { innerPadding ->
+            val bottomBarPadding= animateDpAsState(targetValue = if (bottomBarState.value) innerPadding.calculateBottomPadding() else 24.dp)
             Column(modifier=Modifier
-                .padding(top=innerPadding.calculateTopPadding(), bottom=bottomBarOffset.value)
+                .padding(top=innerPadding.calculateTopPadding(), bottom=bottomBarPadding.value)
             )
             {
                 NavHost(navController = navController, startDestination = "home") {

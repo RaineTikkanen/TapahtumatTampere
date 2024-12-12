@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -29,10 +30,13 @@ class ExploreScreenViewModel(lang: String): ViewModel() {
     val searchBarVisible = _searchBarVisible.asStateFlow()
 
     private val _events = MutableStateFlow<List<Event>>(listOf())
-    val events = searchText.combine(_events) { text, events ->
+    val events = searchText
+        .debounce(500)
+        .combine(_events) { text, events ->
         if(text.isBlank()) {
             events
         } else {
+
             events.filter {
                 it.doesMatchQuery(text)
             }
@@ -71,7 +75,12 @@ class ExploreScreenViewModel(lang: String): ViewModel() {
     }
 
     fun toggleSearchBarVisibility() {
-        _searchBarVisible.value = !_searchBarVisible.value
+        if (_searchBarVisible.value) {
+            _searchText.value = ""
+            _searchBarVisible.value = false
+        } else {
+            _searchBarVisible.value = true
+        }
     }
 }
 

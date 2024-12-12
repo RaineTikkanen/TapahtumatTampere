@@ -62,10 +62,7 @@ fun BottomNavigationBar(navController: NavController, bottomBarState: MutableSta
     )
     {
 
-        BottomAppBar(
-            containerColor =  MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
-            modifier = Modifier.height(80.dp),
-        ) {
+        BottomAppBar{
             navItems.forEach { item ->
                 NavigationBarItem(
                     selected = currentRoute == item.route,
