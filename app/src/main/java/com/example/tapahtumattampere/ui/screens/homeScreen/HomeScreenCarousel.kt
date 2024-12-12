@@ -31,7 +31,6 @@ import com.example.tapahtumattampere.domain.model.Event
 import com.example.tapahtumattampere.utils.findNextDates
 import com.example.tapahtumattampere.utils.formatDate
 import com.example.tapahtumattampere.utils.formatTime
-import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

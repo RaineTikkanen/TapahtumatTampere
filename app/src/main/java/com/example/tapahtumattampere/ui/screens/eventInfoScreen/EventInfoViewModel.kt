@@ -10,10 +10,8 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tapahtumattampere.domain.model.Event
-import com.example.tapahtumattampere.domain.model.EventDate
 import com.example.tapahtumattampere.network.RetrofitInstance
 import com.example.tapahtumattampere.network.model.EventDTOMapper
-import com.example.tapahtumattampere.utils.findNextDates
 
 import kotlinx.coroutines.launch
 

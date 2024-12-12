@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tapahtumattampere.domain.model.Event
 import com.example.tapahtumattampere.network.RetrofitInstance
 import com.example.tapahtumattampere.network.model.EventDTOMapper
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,13 +31,13 @@ class ExploreScreenViewModel(lang: String): ViewModel() {
     val searchBarVisible = _searchBarVisible.asStateFlow()
 
     private val _events = MutableStateFlow<List<Event>>(listOf())
+    @OptIn(FlowPreview::class)
     val events = searchText
         .debounce(500)
         .combine(_events) { text, events ->
         if(text.isBlank()) {
             events
         } else {
-
             events.filter {
                 it.doesMatchQuery(text)
             }
@@ -60,12 +61,11 @@ class ExploreScreenViewModel(lang: String): ViewModel() {
         viewModelScope.launch {
             try {
                 val result = _api.getEvents(lang = lang)
-                //Filter out events with HTML formatting in description
-                _events.value = _mapper.toDomainList(result).filter { event ->
-                    !event.description.contains("<p>")
-                }
+                _events.value = _mapper.toDomainList(result)
                 state = ExploreScreenViewModelState.Success
             } catch (e: Exception) {
+                e.printStackTrace()
+                state = ExploreScreenViewModelState.Error
             }
         }
     }

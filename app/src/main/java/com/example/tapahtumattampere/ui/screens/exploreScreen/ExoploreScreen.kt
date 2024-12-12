@@ -41,7 +41,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -78,7 +77,7 @@ fun ExploreScreen(navController: NavController) {
             BackGroundGradient()
             Column {
                 Box {
-                    HeaderText(searchBarVisible, searchText)
+                    HeaderText(searchBarVisible)
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -91,7 +90,6 @@ fun ExploreScreen(navController: NavController) {
                                 searchText = searchText,
                                 searchBarVisible = searchBarVisible,
                                 onSearchTextChange = { viewModel.onSearchTextChange(it) },
-                                onSearch = { viewModel.toggleSearchBarVisibility() }
                             )
                         }
                         IconButton(
@@ -182,8 +180,7 @@ fun ExploreScreen(navController: NavController) {
 
 
 @Composable
-fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit, searchBarVisible: Boolean, onSearch: () -> Unit) {
-    val keyboardController = LocalSoftwareKeyboardController.current
+fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit, searchBarVisible: Boolean) {
     val focusManager = LocalFocusManager.current
     AnimatedVisibility(
         visible = searchBarVisible,
@@ -212,7 +209,7 @@ fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit, searchBa
 }
 
 @Composable
-fun HeaderText(searchBarVisible: Boolean, searchText: String) {
+fun HeaderText(searchBarVisible: Boolean) {
     AnimatedVisibility(
         visible = !searchBarVisible,
         enter = expandHorizontally() + fadeIn(),

@@ -1,6 +1,5 @@
 package com.example.tapahtumattampere
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -46,14 +45,13 @@ fun App() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-    val darkTheme= rememberSaveable { (mutableStateOf(true)) }
     when (currentDestination?.route) {
         "home" -> bottomBarState.value = true
         "explore" -> bottomBarState.value = true
         else -> bottomBarState.value = false
     }
 
-    TapahtumatTampereTheme(darkTheme=darkTheme.value) {
+    TapahtumatTampereTheme {
         Scaffold(
             bottomBar = {BottomNavigationBar(navController, bottomBarState)},
             modifier = Modifier
@@ -66,7 +64,7 @@ fun App() {
             )
             {
                 NavHost(navController = navController, startDestination = "home") {
-                    composable("home") { HomeScreen(navController, darkTheme) }
+                    composable("home") { HomeScreen(navController) }
                     composable("explore") { ExploreScreen(navController) }
                     composable<Info>{backStackEntry->
                         val info:Info=backStackEntry.toRoute()

@@ -46,7 +46,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.palette)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)

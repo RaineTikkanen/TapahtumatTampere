@@ -14,7 +14,7 @@ data class EventDTO(
     val startTime: String,
     @SerializedName("end_time")
     val endTime: String,
-    val locations: List<Location> ?= null,
+    val locations: List<Location>?,
     val dates: List<Date>,
     val links: List<Link>,
     val sourceName: String,

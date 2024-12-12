@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tapahtumattampere.R
 import com.example.tapahtumattampere.domain.model.Event
 import com.example.tapahtumattampere.network.RetrofitInstance
 import com.example.tapahtumattampere.network.model.EventDTOMapper
@@ -63,10 +62,7 @@ class HomeScreenViewModel(lang: String): ViewModel() {
         viewModelScope.launch {
             try {
                 val result = _api.getEvents(lang = lang)
-                //Filter out events with HTML formatting in description
-                _events = _mapper.toDomainList(result).filter { event ->
-                    !event.description.contains("<p>")
-                }
+                _events = _mapper.toDomainList(result)
                 filterToday()
                 filterThisWeek()
                 filterThisMonth()

@@ -2,7 +2,6 @@ package com.example.tapahtumattampere.utils
 
 import com.example.tapahtumattampere.domain.model.EventDate
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 
 fun findNextDates(dates: List<EventDate>): List<EventDate> {

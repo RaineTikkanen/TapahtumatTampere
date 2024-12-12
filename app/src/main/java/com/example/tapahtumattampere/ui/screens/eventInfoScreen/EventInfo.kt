@@ -83,14 +83,15 @@ fun EventInfo(id: String, navController: NavController) {
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
                     if (event.address != null) {
-                        Column {
+                        Column(modifier = Modifier.fillMaxWidth()) {
                             Card(
                                 colors = CardDefaults.cardColors(
                                     containerColor = MaterialTheme.colorScheme.primary
                                 ),
                                 shape = MaterialTheme.shapes.extraLarge,
                                 modifier = Modifier
-                                    .padding(bottom = 16.dp, top = 16.dp)
+                                    .padding(bottom = 16.dp, top = 16.dp, start = 32.dp, end = 32.dp)
+                                    .fillMaxWidth()
                             ) {
                                 Row(modifier = Modifier.padding(16.dp)) {
                                     Icon(
@@ -99,18 +100,20 @@ fun EventInfo(id: String, navController: NavController) {
                                         modifier = Modifier.align(CenterVertically)
                                     )
                                     Column(
-                                        modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                                        modifier = Modifier
+                                            .padding(start = 16.dp, end = 16.dp)
                                     ) {
                                         Text(
                                             style = MaterialTheme.typography.titleMedium,
                                             text = event.address.name,
                                         )
-                                        if (event.address.address != null || event.address.zipCode != null || event.address.city != null) {
+                                        if (event.address.address != null||event.address.zipCode != null || event.address.city != null) {
                                             Text(
                                                 style = MaterialTheme.typography.titleMedium,
-                                                text = "${event.address.address ?: ""}, ${event.address.zipCode ?: ""} ${event.address.city ?: ""}",
+                                                text = "${event.address.address ?: ""} ${event.address.zipCode ?: ""} ${event.address.city ?: ""}"
                                             )
                                         }
+
                                     }
                                 }
                             }

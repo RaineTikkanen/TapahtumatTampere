@@ -28,7 +28,7 @@ class EventDTOMapper{
     private fun mapToDomainModel(model: EventDTO): Event {
         val location: Coordinates?
         val address: Address?
-        if (model.locations != null && model.locations.isNotEmpty()) {
+        if (!model.locations.isNullOrEmpty()) {
             location =
                 Coordinates(model.locations[0].geoIndex[0], model.locations[0].geoIndex[1])
             address = formatAddress(model.locations[0].address)
@@ -40,6 +40,7 @@ class EventDTOMapper{
         val dates = model.dates.map {
             EventDate(parseDate(it.start), parseDate(it.end))
         }
+
         return Event(
             id = model.id2,
             name = model.name,
@@ -59,7 +60,8 @@ class EventDTOMapper{
         return mapToDomainModel(model)
     }
 
-    fun toDomainList(entities: List<EventDTO>): List<Event> {
-        return entities.map { mapToDomainModel(it) }
+    fun toDomainList(models: List<EventDTO>): List<Event> {
+        val noHTML = models.filter {!it.description.contains("</p>")}
+        return noHTML.map { mapToDomainModel(it) }
     }
 }
