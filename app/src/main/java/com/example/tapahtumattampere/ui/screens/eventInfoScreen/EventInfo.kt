@@ -49,7 +49,6 @@ fun EventInfo(id: String, navController: NavController) {
         EventInfoViewModel(id, lang)
     }
     val event = viewModel.event
-    val nextDates = viewModel.nextDates
     when (viewModel.state) {
         EventInfoViewModelState.Loading -> LoadingScreen()
         EventInfoViewModelState.Error -> ErrorScreen()
@@ -132,22 +131,6 @@ fun EventInfo(id: String, navController: NavController) {
                                     )
                                 }
                             }
-                        }
-                    }
-                    if (nextDates.isNotEmpty()) {
-                        Card(
-                            shape = MaterialTheme.shapes.extraLarge,
-                            colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer
-                            ),
-                            modifier = Modifier
-                                .padding(bottom = 16.dp, top = 16.dp)
-                        ) {
-                            Text(
-                                modifier = Modifier.padding(16.dp),
-                                text="${formatDate(nextDates[0].start)} ${formatTime(nextDates[0].start)}",
-                                style = MaterialTheme.typography.titleMedium,
-                            )
                         }
                     }
                     Card (

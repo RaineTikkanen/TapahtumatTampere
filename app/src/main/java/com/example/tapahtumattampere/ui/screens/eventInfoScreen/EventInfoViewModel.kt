@@ -28,7 +28,6 @@ class EventInfoViewModel(id: String, lang: String) : ViewModel() {
     var event by mutableStateOf<Event?>(null)
     private val api = RetrofitInstance.api
     private val mapper = EventDTOMapper()
-    var nextDates by mutableStateOf<List<EventDate>>(emptyList())
     var state by mutableStateOf<EventInfoViewModelState>(EventInfoViewModelState.Loading)
 
     init {
@@ -43,7 +42,6 @@ class EventInfoViewModel(id: String, lang: String) : ViewModel() {
                     throw Exception("Event not found")
                 }
                 event = mapper.toDomainModel(result)
-                nextDates = findNextDates(event!!.dates)
                 state = EventInfoViewModelState.Success
             } catch (e: Exception) {
                 e.printStackTrace()
