@@ -12,5 +12,4 @@ interface EventApiService{
     suspend fun getEvents(
         @Query("lang") lang: String
     ): List<EventDTO>
-
 }

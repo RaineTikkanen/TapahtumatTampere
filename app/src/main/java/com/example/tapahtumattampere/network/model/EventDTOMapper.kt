@@ -5,7 +5,6 @@ import com.example.tapahtumattampere.domain.model.Coordinates
 import com.example.tapahtumattampere.domain.model.Event
 import com.example.tapahtumattampere.domain.model.EventDate
 import java.time.LocalDateTime
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 
@@ -22,8 +21,8 @@ class EventDTOMapper{
 
     private fun parseDate(dateString: String): LocalDateTime {
         val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
-        val zonedDateTime = ZonedDateTime.parse(dateString, formatter)
-        return zonedDateTime.toLocalDateTime()
+        val localDateTime = LocalDateTime.parse(dateString, formatter)
+        return localDateTime
     }
 
     private fun mapToDomainModel(model: EventDTO): Event {
