@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">EventsTampere</string>
+    <string name="today">Today</string>
+    <string name="this_week">This week</string>
+    <string name="this_month">This month</string>
+    <string name="lang">en</string>
+    <string name="ShowOnMap">Show on map</string>
+    <string name="OpenInBrowser">Open in browser</string>
+    <string name="EventTimes">Event times</string>
+    <string name="Loading">Loading</string>
+    <string name="CantLoadData">Can\'t load data</string>
+    <string name="events">Events</string>
+    <string name="search">Search</string>
+    <string name="no_events_found">No events found</string>
+    <string name="explore">Explore</string>
+</resources>
